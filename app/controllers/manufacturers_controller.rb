@@ -2,7 +2,9 @@ class ManufacturersController < ApplicationController
   before_action :set_manufacturer, only: [:show, :update, :destroy]
 
   def index
-    @manufacturers = Manufacturer.includes(:vehicles)
+    page_number = params[:page].try(:[], :number)
+    per_page = params[:page].try(:[], :size)
+    @manufacturers = Manufacturer.includes(:vehicles).page(page_number).per(per_page)
 
     render json: @manufacturers
   end

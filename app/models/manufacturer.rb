@@ -6,4 +6,6 @@ class Manufacturer < ApplicationRecord
   def as_json(option={})
     super(root: true, include: {vehicles: {include: :sale}})
   end
+
+  paginates_per 10
 end

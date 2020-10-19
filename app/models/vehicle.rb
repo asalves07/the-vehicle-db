@@ -10,4 +10,6 @@ class Vehicle < ApplicationRecord
   def as_json(option={})
     super(root: true, include: :sale)
   end
+
+  paginates_per 10
 end

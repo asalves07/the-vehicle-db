@@ -2,7 +2,9 @@ class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :update, :destroy]
 
   def index
-    @vehicles = Vehicle.all
+    page_number = params[:page].try(:[], :number)
+    per_page = params[:page].try(:[], :size)
+    @vehicles = Vehicle.all.page(params[:page]).page(page_number).per(per_page)
 
     render json: @vehicles
   end
