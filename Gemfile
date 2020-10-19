@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 # ActiveModelSerializers brings convention over configuration to your JSON generation
 # gem 'active_model_serializers', '~> 0.10.0'
