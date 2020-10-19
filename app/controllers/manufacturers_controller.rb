@@ -8,7 +8,7 @@ class ManufacturersController < ApplicationController
   end
 
   def show
-    render json: @manufacturer, status: 200
+    render json: @manufacturer
   end
 
   def update
@@ -34,15 +34,19 @@ class ManufacturersController < ApplicationController
   end
 
   private
-
   def set_manufacturer
-    @manufacturer = Manufacturer.find(params[:id])
+    if params[:vehicle_id]
+      @manufacturer = Vehicle.find(params[:vehicle_id]).manufacturer
+    else
+      @manufacturer = Manufacturer.find(params[:id])
+    end
   end
 
   def manufacturer_params
-    params.require(:manufacturer).permit(:name, 
-      vehicles_attributes: [:id, :car_model, :color, :transmission, :drive_type, :fuel_type, :car_type,
-                            :door, :engine, :year, :kilometrage, :plate, :_destroy, sale_attributes: [:id, :sold]]
-      )
+    # params.require(:manufacturer).permit(:name, 
+    #   vehicles_attributes: [:id, :car_model, :color, :transmission, :drive_type, :fuel_type, :car_type,
+    #                         :door, :engine, :year, :kilometrage, :plate, :_destroy, sale_attributes: [:id, :sold]]
+    #   )
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params)
   end
 end
