@@ -1,6 +1,7 @@
 class CreateVehicles < ActiveRecord::Migration[6.0]
   def change
     create_table :vehicles do |t|
+      t.string :car_model
       t.string :color
       t.string :transmission
       t.string :drive_type
@@ -11,7 +12,7 @@ class CreateVehicles < ActiveRecord::Migration[6.0]
       t.integer :year
       t.integer :kilometrage
       t.string :plate
-      t.references :car_model, null: false, foreign_key: true
+      t.references :manufacturer, null: false, foreign_key: true
 
       t.timestamps
     end

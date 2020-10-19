@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_18_204154) do
-
-  create_table "car_models", force: :cascade do |t|
-    t.string "name"
-    t.integer "manufacturer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["manufacturer_id"], name: "index_car_models_on_manufacturer_id"
-  end
+ActiveRecord::Schema.define(version: 2020_10_19_012237) do
 
   create_table "manufacturers", force: :cascade do |t|
     t.string "name"
@@ -35,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_10_18_204154) do
   end
 
   create_table "vehicles", force: :cascade do |t|
+    t.string "car_model"
     t.string "color"
     t.string "transmission"
     t.string "drive_type"
@@ -45,13 +38,12 @@ ActiveRecord::Schema.define(version: 2020_10_18_204154) do
     t.integer "year"
     t.integer "kilometrage"
     t.string "plate"
-    t.integer "car_model_id", null: false
+    t.integer "manufacturer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["car_model_id"], name: "index_vehicles_on_car_model_id"
+    t.index ["manufacturer_id"], name: "index_vehicles_on_manufacturer_id"
   end
 
-  add_foreign_key "car_models", "manufacturers"
   add_foreign_key "sales", "vehicles"
-  add_foreign_key "vehicles", "car_models"
+  add_foreign_key "vehicles", "manufacturers"
 end
