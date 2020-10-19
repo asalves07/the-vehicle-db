@@ -1,5 +1,8 @@
 class CarModelsController < ApplicationController
   def index
+    @car_models = CarModel.all
+
+    render json: @car_models 
   end
 
   def show
